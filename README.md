@@ -1,5 +1,6 @@
 Para tester:
 
+```
 APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:vFpCMxR+ya2oBJhg5KROmmssxh9QZCiBrudFwvAkdr4=
@@ -76,6 +77,7 @@ VITE_REVERB_APP_KEY="${REVERB_APP_KEY}"
 VITE_REVERB_HOST="${REVERB_HOST}"
 VITE_REVERB_PORT="${REVERB_PORT}"
 VITE_REVERB_SCHEME="${REVERB_SCHEME}"
+```
 
 
 cambiar DB_HOST=192.168.1.5 por la ip de tu red lan debidoa  que la base de datos no esta en contenedor.
