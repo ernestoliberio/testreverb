@@ -9,6 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <input id="latitude" class="text-black" placeholder="latitude"/>
+                    <input id="longitude"  class="text-black" placeholder="longitude"/>
+                    <input id="receptor" type="hidden" value="{{auth()->user()->id===1?2:1}}"/>
+                    <button type="button" onclick="sender()">SEND</button>
+
                     <div id="map" style="width: 100%; height: 500px;"></div>
                     <span id="trace"></span>
                 </div>
@@ -16,7 +21,12 @@
         </div>
     </div>
     <script defer>
-
+        function sender(){
+                const lat=document.getElementById('latitude').value;
+                const lng=document.getElementById('longitude').value;
+                const receptor=document.getElementById('receptor').value;
+                window.Echo.connector.pusher.send_event('tracking', JSON.stringify({ lat,lng,receptor,"emitter":{{auth()->user()->id}} }), 'trackingView.'+receptor);
+        }
 
       window.onload = function() {
        var map = L.map('map').setView([-2.092893, -79.693279], 20);
@@ -26,7 +36,7 @@
         var marker = L.marker([-2.092893,-79.693279]).addTo(map);
         marker.bindPopup("position now");
 
-          window.Echo.private('trackingView.2')
+          window.Echo.private('trackingView.{{auth()->user()->id}}')
           .subscribed(function(){
               console.log('subscribed To Channel')
           })

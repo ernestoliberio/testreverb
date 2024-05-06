@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Dto\TrackingDto;
-use App\Events\TrackingEvent;
+use App\Events\SendTrackingEvent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -27,6 +27,6 @@ class TrackingJob implements ShouldQueue
      */
     public function handle(): void
     {
-        event(new TrackingEvent($this->trackingDto));
+        event(new SendTrackingEvent($this->trackingDto));
     }
 }
