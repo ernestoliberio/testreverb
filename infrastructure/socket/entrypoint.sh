@@ -8,20 +8,16 @@ echo "***********************************************************"
 
 set -e
   echo "${Green} install composer..."
-  composer install --working-dir=/var/www/app --no-scripts --no-interaction --optimize-autoloader
+  composer install --working-dir=/var/www/html --no-scripts --no-interaction --optimize-autoloader
 
    echo "${Green} Permissions..."
-   chmod -Rf 775 /var/www/app/storage
-   chmod -Rf 775 /var/www/app/bootstrap/cache
+   chmod -Rf 775 /var/www/html/storage
+   chmod -Rf 775 /var/www/html/bootstrap/cache
 
 echo  "${Green} Install Npm and build"
-cd /var/www/app
+cd /var/www/html
 npm install
 npm run build
-
-rm -Rf /var/www/localhost/htdocs || true
-mkdir -p /var/www/localhost/htdocs || true
-ln -s /var/www/app/public/* /var/www/localhost/htdocs/
 
 echo ""
 echo "**********************************"

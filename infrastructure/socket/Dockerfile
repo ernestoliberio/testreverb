@@ -81,15 +81,14 @@ RUN apk add nodejs npm
 RUN apk add supervisor \
     && rm -rf /var/cache/apk/*
 
-RUN rm /var/www/localhost/htdocs || true
-RUN mkdir -p /var/www/localhost/htdocs || true
 RUN mkdir /etc/supervisor.d
 
 
 COPY entrypoint.sh /entrypoint.sh
 
-WORKDIR /var/www/app
+WORKDIR /var/www/html
 EXPOSE 80
+EXPOSE 8080
 
 RUN chmod +x /entrypoint.sh
 
